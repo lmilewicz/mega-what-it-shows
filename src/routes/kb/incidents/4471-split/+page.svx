@@ -1,6 +1,6 @@
 ---
 layout: runbook
-title: '#4471, split: three problems, not one'
+title: '#4471, split: two problems, not one'
 owner: Lukasz Milewicz
 status: open
 reviewed: 2026-11-09
@@ -15,10 +15,11 @@ signature: Lukasz Milewicz
 </script>
 
 [#4471](/kb/incidents/4471) says one bug: the parser reads dates month first. The <CauseCount ticket={4471} /> reports
-merged into it describe <CauseCount ticket={4471} of="problems" /> different problems. Each now has its own ticket, and fixing one does not fix the others.
+merged into it describe <CauseCount ticket={4471} of="problems" /> different problems. Each now has its own ticket, and
+fixing one does not fix the other.
 
 <Callout kind="warn">
-#4471 is not one issue. Closing it when the parser fix ships leaves two bugs open.
+#4471 is not one issue. Closing it when the parser fix ships leaves the booking form bug open.
 </Callout>
 
 ## What #4471 holds
@@ -28,38 +29,33 @@ merged into it describe <CauseCount ticket={4471} of="problems" /> different pro
 The table is the desk's own view, as exported: every report counted once, under the cause its tenant and channel
 give it. The counts are computed when the page renders, so they follow the data as the desk keeps merging.
 
-## The three problems
+## The two problems
 
 **`parser`: dates parse month first.** <CauseCount ticket={4471} problem="parser" /> reports from <CauseCount ticket={4471} problem="parser" of="tenants" />
-tenants. Every tenant on file writes the day first, so any
-date with a day of 12 or less comes out swapped: 7 April becomes 4 July. This is the bug #4471 names.
-Tracked in [issue 1](https://github.com/lmilewicz/mega-what-it-shows/issues/1).
+tenants. Every tenant on file writes the day first, so any date with a day of 12 or less comes out swapped:
+7 April becomes 4 July. This is the bug #4471 names. Tracked in
+[issue 1](https://github.com/lmilewicz/mega-what-it-shows/issues/1).
 
-**`hint`: the booking-v3 form tells people to type month first.** <CauseCount ticket={4471} problem="hint" /> reports,
+**`hint`: the booking form tells people to type month first.** <CauseCount ticket={4471} problem="hint" /> reports,
 all through the form on the <CauseCount ticket={4471} problem="hint" of="tenants" /> booking-v3 tenants. The form
 prints `MM/DD/YYYY`, people follow it, and the form reads their date day first. The symptom looks like the
 parser bug, but the parser fix will not touch it. Tracked in
 [issue 2](https://github.com/lmilewicz/mega-what-it-shows/issues/2).
 
-**`shift`: the date moves by one day.** <CauseCount ticket={4471} problem="shift" /> reports. Nothing is swapped:
-12 May shows as 11 May, a meeting lands on Tuesday in Lisbon and Monday in Toronto, an invite arrives before
-the booking. That is a time-zone or daylight-saving conversion. The desk had already marked these as a
-one-day move in its notes, but this kb only footnoted them under `parser`, so they never got a ticket. In the
-desk's view they stay counted under `parser`, where their tenant files them, and the footnote under the table
-points here. Tracked in [issue 3](https://github.com/lmilewicz/mega-what-it-shows/issues/3).
+The desk read <CauseCount ticket={4471} problem="moved" /> of the reports as a one-day move rather than a swap
+(the footnote under the table). They come from day-first tenants outside the booking form, so they are filed under
+`parser` and counted there, not as a third problem.
 
 ## Why they were merged
 
-The desk merges on subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject)), and all three
-problems arrive with the same subjects: "Date is wrong", "Wrong day on the invite". Intake tags did not help either:
-the tag is a guess from the reporter's browser, and it disagrees with the tenant's form on dozens of the
-reports in the table above. The cause comes from the tenant and the way the report came in, and the desk's own
-reading of the body: `src/lib/kb/causes.ts`.
+The desk merges on subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject)), and both problems
+arrive with the same subjects: "Date is wrong", "Wrong day on the invite". Intake tags did not help either: the tag
+is a guess from the reporter's browser, and it disagrees with the tenant's form on dozens of the reports in the
+table above. The cause comes from the tenant and the way the report came in: `src/lib/kb/causes.ts`.
 
 ## How the counts were checked
 
 - The export has more rows than reports: its pages overlap, so the same report can appear twice. One id, one report.
-- `npm run counts` runs the same `causes.ts` this page runs and prints the reports per cause, and how many of
-  them the desk read as a one-day move.
+- `npm run counts` runs the same `causes.ts` this page runs and prints the reports per cause.
 
 <RenderStamp {signature} />

@@ -51,8 +51,7 @@
   {@const moved = readAs(g, notes.oneDayMove)}
   {#if moved}
     <p class="note">
-      {moved} reports read as a one-day move; filed under <code>{g.cause}</code> by tenant. The one-day move is its own
-      problem: <a href={ticketUrl('shift')}>issue {TICKETS.shift.issue}</a>.
+      {moved} reports read as a one-day move; filed under <code>{g.cause}</code> by tenant.
     </p>
   {/if}
 {/each}

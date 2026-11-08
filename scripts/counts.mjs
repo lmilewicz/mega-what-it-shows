@@ -14,5 +14,5 @@ console.log(`#${ticket}: ${merged.length} reports`);
 for (const g of groups) {
   console.log(`${g.cause.padEnd(9)} ${String(g.reports.length).padStart(4)}  tenants ${g.tenants}  ${g.firstSeen} → ${g.lastSeen}`);
   const moved = readAs(g, oneDayMove);
-  if (moved) console.log(`  of which read as a one-day move (shift): ${moved}`);
+  if (moved) console.log(`  of which read as a one-day move: ${moved}`);
 }
