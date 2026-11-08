@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="../../../_app/immutable/entry/start.DrkltrAm.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/BhNYQF9N.js" rel="modulepreload">
+    <link href="../../../_app/immutable/entry/start.DTRTQJmk.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/DRNmyL3w.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/W8JXJZ79.js" rel="modulepreload">
-		<link href="../../../_app/immutable/entry/app.D2vKnuiM.js" rel="modulepreload">
+		<link href="../../../_app/immutable/entry/app.CR1YcPha.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/xihTtKlq.js" rel="modulepreload">
 		<link href="../../../_app/immutable/nodes/0.DH-1dZK1.js" rel="modulepreload">
-		<link href="../../../_app/immutable/nodes/5.BhWI6UHG.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/BUYukhlc.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/5.DtpmaOcS.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/BlufP2RD.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/DooIRhXB.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/Ds74hwtK.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/CrgYNgkp.js" rel="modulepreload">
@@ -21,14 +21,16 @@
 		<link href="../../../_app/immutable/assets/_page.WePi3wDe.css" rel="stylesheet">
   </head>
   <body data-sveltekit-preload-data="hover">
-    <div style="display: contents"><!--[--><!--[0--><!--[--><!--[--><div class="kb svelte-e2jw2j"><header><a class="crumb svelte-e2jw2j" href="/kb">support desk · kb</a> <h1 class="svelte-e2jw2j">#4471, split: two problems, not one</h1> <p class="meta svelte-e2jw2j"><span>owner <b>Lukasz Milewicz</b></span> <span class="status open svelte-e2jw2j">open</span> <span class="svelte-e2jw2j">reviewed 2026-11-09 · -1 days ago</span></p></header> <!--[-1--><!--]--> <main><p><a href="/kb/incidents/4471">#4471</a> says one bug: the parser reads dates month first. The <strong>412</strong><!----> reports
-merged into it describe <strong>2</strong><!----> different problems. Each now has its own ticket, and
-fixing one does not fix the other.</p> <aside class="warn svelte-17bri61"><!---->#4471 is not one issue. Closing it when the parser fix ships leaves the booking form bug open.<!----></aside><!----> <h2>What #4471 holds</h2> <p class="sum svelte-12oyimm"><strong>412</strong> reports merged into #4471 · <strong>2</strong> causes</p> <table><thead><tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th>seen</th><th>tracked in</th></tr></thead><tbody><!--[--><tr class="svelte-12oyimm"><td class="svelte-12oyimm"><code>parser</code></td><td class="svelte-12oyimm">379</td><td class="tags svelte-12oyimm">parser ×356 · hint ×23</td><td class="svelte-12oyimm">11</td><td class="svelte-12oyimm">2026-04-01 → 2026-10-04</td><td class="svelte-12oyimm"><!--[0--><a href="https://github.com/lmilewicz/mega-what-it-shows/issues/1">issue 1</a><!--]--></td></tr><tr class="svelte-12oyimm wrong"><td class="svelte-12oyimm"><code>hint</code></td><td class="svelte-12oyimm">33</td><td class="tags svelte-12oyimm">hint ×18 · parser ×15</td><td class="svelte-12oyimm">3</td><td class="svelte-12oyimm">2026-04-17 → 2026-09-22</td><td class="svelte-12oyimm"><!--[0--><a href="https://github.com/lmilewicz/mega-what-it-shows/issues/2">issue 2</a> · not #4471<!--]--></td></tr><!--]--></tbody></table> <!--[--><!--[0--><p class="note svelte-12oyimm">5 reports read as a one-day move; filed under <code>parser</code> by tenant.</p><!--]--><!--[-1--><!--]--><!--]--><!----> <p>The table is the desk’s own view, as exported: every report counted once, under the cause its tenant and channel
+    <div style="display: contents"><!--[--><!--[0--><!--[--><!--[--><div class="kb svelte-e2jw2j"><header><a class="crumb svelte-e2jw2j" href="/kb">support desk · kb</a> <h1 class="svelte-e2jw2j">#4471, split: two problems, not one</h1> <p class="meta svelte-e2jw2j"><span>owner <b>Lukasz Milewicz</b></span> <span class="status closed svelte-e2jw2j">closed</span> <span class="svelte-e2jw2j">reviewed 2026-11-09 · -1 days ago</span></p></header> <!--[-1--><!--]--> <main><p><a href="/kb/incidents/4471">#4471</a> says one bug: the parser reads dates month first. The <strong>412</strong><!----> reports
+merged into it describe <strong>2</strong><!----> different problems. Each got its own ticket, and
+fixing one did not fix the other. Engineering closed #4471 on 5 October.</p> <aside class="note svelte-17bri61"><code>parser</code>: fixed (fix(dates): parse dd/mm for eu locales). <code>hint</code>: won't fix, the booking-v3 form is retired.
+Both tickets are closed.<!----></aside><!----> <h2>What #4471 holds</h2> <p class="sum svelte-12oyimm"><strong>412</strong> reports merged into #4471 · <strong>2</strong> causes</p> <table><thead><tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th>seen</th><th>tracked in</th></tr></thead><tbody><!--[--><tr class="svelte-12oyimm"><td class="svelte-12oyimm"><code>parser</code></td><td class="svelte-12oyimm">379</td><td class="tags svelte-12oyimm">parser ×356 · hint ×23</td><td class="svelte-12oyimm">11</td><td class="svelte-12oyimm">2026-04-01 → 2026-10-04</td><td class="svelte-12oyimm"><!--[0--><a href="https://github.com/lmilewicz/mega-what-it-shows/issues/1">issue 1</a><!--]--></td></tr><tr class="svelte-12oyimm wrong"><td class="svelte-12oyimm"><code>hint</code></td><td class="svelte-12oyimm">33</td><td class="tags svelte-12oyimm">hint ×18 · parser ×15</td><td class="svelte-12oyimm">3</td><td class="svelte-12oyimm">2026-04-17 → 2026-09-22</td><td class="svelte-12oyimm"><!--[0--><a href="https://github.com/lmilewicz/mega-what-it-shows/issues/2">issue 2</a> · not #4471<!--]--></td></tr><!--]--></tbody></table> <!--[--><!--[0--><p class="note svelte-12oyimm">5 reports read as a one-day move; filed under <code>parser</code> by tenant.</p><!--]--><!--[-1--><!--]--><!--]--><!----> <p>The table is the desk’s own view, as exported: every report counted once, under the cause its tenant and channel
 give it. The counts are computed when the page renders, so they follow the data as the desk keeps merging.</p> <h2>The two problems</h2> <p><strong><code>parser</code>: dates parse month first.</strong> <strong>379</strong><!----> reports from <strong>11</strong><!----> tenants. Every tenant on file writes the day first, so any date with a day of 12 or less comes out swapped:
-7 April becomes 4 July. This is the bug #4471 names. Tracked in <a href="https://github.com/lmilewicz/mega-what-it-shows/issues/1" rel="nofollow">issue 1</a>.</p> <p><strong><code>hint</code>: the booking form tells people to type month first.</strong> <strong>33</strong><!----> reports,
+7 April becomes 4 July. This is the bug #4471 names. <strong>Fixed</strong>: the parser now reads dd/mm for EU locales. <a href="https://github.com/lmilewicz/mega-what-it-shows/issues/1" rel="nofollow">Issue 1</a>, closed.</p> <p><strong><code>hint</code>: the booking form tells people to type month first.</strong> <strong>33</strong><!----> reports,
 all through the form on the <strong>3</strong><!----> booking-v3 tenants. The form
 prints <code>MM/DD/YYYY</code>, people follow it, and the form reads their date day first. The symptom looks like the
-parser bug, but the parser fix will not touch it. Tracked in <a href="https://github.com/lmilewicz/mega-what-it-shows/issues/2" rel="nofollow">issue 2</a>.</p> <p>The desk read <strong>5</strong><!----> of the reports as a one-day move rather than a swap
+parser bug, and the parser fix did not touch it. <strong>Won’t fix</strong>: the booking-v3 form is retired, so no new reports
+can come in this way. <a href="https://github.com/lmilewicz/mega-what-it-shows/issues/2" rel="nofollow">Issue 2</a>, closed.</p> <p>The desk read <strong>5</strong><!----> of the reports as a one-day move rather than a swap
 (the footnote under the table). They come from day-first tenants outside the booking form, so they are filed under <code>parser</code> and counted there, not as a third problem.</p> <h2>Why they were merged</h2> <p>The desk merges on subject line (<a href="/kb/decisions/0001-dedupe-by-subject">decision 0001</a>), and both problems
 arrive with the same subjects: “Date is wrong”, “Wrong day on the invite”. Intake tags did not help either: the tag
 is a guess from the reporter’s browser, and it disagrees with the tenant’s form on dozens of the reports in the
@@ -36,15 +38,15 @@ table above. The cause comes from the tenant and the way the report came in: <co
 			
 			<script>
 				{
-					__sveltekit_1m7d17 = {
+					__sveltekit_q2id0f = {
 						base: new URL("../../..", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("../../../_app/immutable/entry/start.DrkltrAm.js"),
-						import("../../../_app/immutable/entry/app.D2vKnuiM.js")
+						import("../../../_app/immutable/entry/start.DTRTQJmk.js"),
+						import("../../../_app/immutable/entry/app.CR1YcPha.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 5],

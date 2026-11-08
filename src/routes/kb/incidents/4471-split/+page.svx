@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471, split: two problems, not one'
 owner: Lukasz Milewicz
-status: open
+status: closed
 reviewed: 2026-11-09
 signature: Lukasz Milewicz
 ---
@@ -15,11 +15,12 @@ signature: Lukasz Milewicz
 </script>
 
 [#4471](/kb/incidents/4471) says one bug: the parser reads dates month first. The <CauseCount ticket={4471} /> reports
-merged into it describe <CauseCount ticket={4471} of="problems" /> different problems. Each now has its own ticket, and
-fixing one does not fix the other.
+merged into it describe <CauseCount ticket={4471} of="problems" /> different problems. Each got its own ticket, and
+fixing one did not fix the other. Engineering closed #4471 on 5 October.
 
-<Callout kind="warn">
-#4471 is not one issue. Closing it when the parser fix ships leaves the booking form bug open.
+<Callout>
+<code>parser</code>: fixed (fix(dates): parse dd/mm for eu locales). <code>hint</code>: won't fix, the booking-v3 form is retired.
+Both tickets are closed.
 </Callout>
 
 ## What #4471 holds
@@ -33,14 +34,14 @@ give it. The counts are computed when the page renders, so they follow the data 
 
 **`parser`: dates parse month first.** <CauseCount ticket={4471} problem="parser" /> reports from <CauseCount ticket={4471} problem="parser" of="tenants" />
 tenants. Every tenant on file writes the day first, so any date with a day of 12 or less comes out swapped:
-7 April becomes 4 July. This is the bug #4471 names. Tracked in
-[issue 1](https://github.com/lmilewicz/mega-what-it-shows/issues/1).
+7 April becomes 4 July. This is the bug #4471 names. **Fixed**: the parser now reads dd/mm for EU locales.
+[Issue 1](https://github.com/lmilewicz/mega-what-it-shows/issues/1), closed.
 
 **`hint`: the booking form tells people to type month first.** <CauseCount ticket={4471} problem="hint" /> reports,
 all through the form on the <CauseCount ticket={4471} problem="hint" of="tenants" /> booking-v3 tenants. The form
 prints `MM/DD/YYYY`, people follow it, and the form reads their date day first. The symptom looks like the
-parser bug, but the parser fix will not touch it. Tracked in
-[issue 2](https://github.com/lmilewicz/mega-what-it-shows/issues/2).
+parser bug, and the parser fix did not touch it. **Won't fix**: the booking-v3 form is retired, so no new reports
+can come in this way. [Issue 2](https://github.com/lmilewicz/mega-what-it-shows/issues/2), closed.
 
 The desk read <CauseCount ticket={4471} problem="moved" /> of the reports as a one-day move rather than a swap
 (the footnote under the table). They come from day-first tenants outside the booking form, so they are filed under
