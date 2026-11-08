@@ -1,13 +1,14 @@
 <script lang="ts">
   import reports from '#lib/data/reports-4471.json';
   import notes from '#lib/data/desk-notes.json';
-  import { groupByCause, readAs, ticketCause, uniqueById, type Report } from '#lib/kb/causes';
+  import { groupByCause, ticketCause, uniqueById, type Report } from '#lib/kb/causes';
   import { tenantOf } from '#lib/kb/locales';
+  import { TICKETS, ticketUrl } from '#lib/kb/tickets';
 
   let { ticket }: { ticket: number } = $props();
 
   const merged = $derived(uniqueById(reports as Report[]).filter((r) => r.mergedInto === ticket));
-  const groups = $derived(groupByCause(merged, tenantOf));
+  const groups = $derived(groupByCause(merged, tenantOf, notes.oneDayMove));
   const owner = $derived(ticketCause(groups, ticket));
   const tags = (g: { taggedAs: Record<string, number> }) =>
     Object.entries(g.taggedAs)
@@ -24,7 +25,7 @@
 
 <table>
   <thead>
-    <tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th>seen</th><th></th></tr>
+    <tr><th>cause</th><th>reports</th><th>tagged as</th><th>tenants</th><th>seen</th><th>tracked in</th></tr>
   </thead>
   <tbody>
     {#each groups as g (g.cause)}
@@ -34,23 +35,21 @@
         <td class="tags">{tags(g)}</td>
         <td>{g.tenants}</td>
         <td>{g.firstSeen} → {g.lastSeen}</td>
-        <td>{g.cause === owner ? `#${ticket}` : 'not this ticket — no ticket of its own'}</td>
+        <td>
+          {#if g.cause !== 'unplaced'}
+            <a href={ticketUrl(g.cause)}>issue {TICKETS[g.cause].issue}</a>{g.cause === owner ? '' : ` · not #${ticket}`}
+          {:else}
+            no ticket: tenant not on file
+          {/if}
+        </td>
       </tr>
     {/each}
   </tbody>
 </table>
 
-{#each groups as g (g.cause)}
-  {@const moved = readAs(g, notes.oneDayMove)}
-  {#if moved}
-    <p class="note">{moved} reports read as a one-day move; filed under <code>{g.cause}</code> by tenant.</p>
-  {/if}
-{/each}
-
 <style>
   .sum { font-size: 1.1rem; }
   .tags { color: var(--muted); font-size: 0.85em; }
-  .note { color: var(--muted); font-size: 0.85em; }
   .wrong td { background: var(--warn-bg); }
   .wrong td:last-child { color: var(--warn); font-weight: 600; }
 </style>

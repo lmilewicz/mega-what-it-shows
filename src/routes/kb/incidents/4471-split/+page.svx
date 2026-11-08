@@ -1,0 +1,62 @@
+---
+layout: runbook
+title: '#4471, split: three problems, not one'
+owner: Lukasz Milewicz
+status: open
+reviewed: 2026-11-09
+signature: Lukasz Milewicz
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import CauseCount from '#lib/kb/CauseCount.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+[#4471](/kb/incidents/4471) says one bug: the parser reads dates month first. The <CauseCount ticket={4471} /> reports
+merged into it describe <CauseCount ticket={4471} of="causes" /> different problems. Each now has its own ticket, and fixing one does not fix the others.
+
+<Callout kind="warn">
+#4471 is not one issue. Closing it when the parser fix ships leaves two bugs open.
+</Callout>
+
+## What #4471 holds
+
+<CauseTable ticket={4471} />
+
+The counts above are computed from the export when the page renders, so they follow the data as the desk keeps merging.
+
+## The three problems
+
+**`parser`: dates parse month first.** <CauseCount ticket={4471} cause="parser" /> reports from <CauseCount ticket={4471} cause="parser" of="tenants" />
+tenants. Every tenant on file writes the day first, so any
+date with a day of 12 or less comes out swapped: 7 April becomes 4 July. This is the bug #4471 names.
+Tracked in [issue 1](https://github.com/lmilewicz/mega-what-it-shows/issues/1).
+
+**`hint`: the booking-v3 form tells people to type month first.** <CauseCount ticket={4471} cause="hint" /> reports,
+all through the form on the <CauseCount ticket={4471} cause="hint" of="tenants" /> booking-v3 tenants. The form
+prints `MM/DD/YYYY`, people follow it, and the form reads their date day first. The symptom looks like the
+parser bug, but the parser fix will not touch it. Tracked in
+[issue 2](https://github.com/lmilewicz/mega-what-it-shows/issues/2).
+
+**`shift`: the date moves by one day.** <CauseCount ticket={4471} cause="shift" /> reports. Nothing is swapped:
+12 May shows as 11 May, a meeting lands on Tuesday in Lisbon and Monday in Toronto, an invite arrives before
+the booking. That is a time-zone or daylight-saving conversion. The desk had already marked these as a
+one-day move in its notes, but this kb only footnoted them under `parser`, so they never got a ticket.
+Tracked in [issue 3](https://github.com/lmilewicz/mega-what-it-shows/issues/3).
+
+## Why they were merged
+
+The desk merges on subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject)), and all three
+problems arrive with the same subjects: "Date is wrong", "Wrong day on the invite". Intake tags did not help either:
+the tag is a guess from the reporter's browser, and it disagrees with the tenant's form on dozens of the
+reports in the table above. The cause comes from the tenant and the way the report came in, and the desk's own
+reading of the body: `src/lib/kb/causes.ts`.
+
+## How the counts were checked
+
+- The export has more rows than reports: its pages overlap, so the same report can appear twice. One id, one report.
+- `npm run counts` runs the same `causes.ts` this page runs and prints the reports per cause.
+
+<RenderStamp {signature} />

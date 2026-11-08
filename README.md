@@ -34,3 +34,10 @@ Support desk. Decision records: whoever signed them.
 ---
 
 Exported 2026-10-04 from the `support` repo, `apps/kb/` → `src/`.
+
+## This copy (MEGA.dev S01E03)
+
+- `src/routes/kb/incidents/4471-split/+page.svx`: signed page that splits #4471 into three causes, each tracked in its own issue (#1 parser, #2 hint, #3 shift).
+- `src/lib/kb/causes.ts`: adds the `shift` cause (the desk's `oneDayMove` notes) instead of a footnote under `parser`.
+- `build/kb/incidents/4471-split/index.html`: the page as the desk sees it (`npm install && npm run build`).
+- `npm run counts`: reports per cause, from the same code the page runs.
